@@ -7,9 +7,9 @@ export default function App() {
   const path = useLocation();
 
   return (
-    path === '/open'
+    path.startsWith('open/')
     ? <Open />
-    : path === '/schrijf'
+    : path === 'schrijf'
     ? <Write />
     : <Home />
   );

@@ -20,6 +20,9 @@
   &.column {
     flex-direction: column;
   }
+  &.wrap {
+    flex-wrap: wrap;
+  }
 }
 
 .button {
@@ -32,7 +35,7 @@
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
   &:hover {
     color: oklch(from var(--button-color) 30% c h);
     background-color: var(--button-color);
@@ -52,21 +55,49 @@
   to { opacity: 0; }
 }
 
+[data-theme='pink'] {
+  --color-primary: #af7595;
+  --color-secondary: #8c2155;
+  --color-accent: #5b85aa;
+}
+[data-theme='red'] {
+  --color-primary: #c94c4c;
+  --color-secondary: #8b0000;
+  --color-accent: #ff6b6b;
+}
+[data-theme='blue'] {
+  --color-primary: #5b9bd5;
+  --color-secondary: #2e5c8a;
+  --color-accent: #87ceeb;
+}
+[data-theme='green'] {
+  --color-primary: #6ba368;
+  --color-secondary: #2d5a2b;
+  --color-accent: #90ee90;
+}
+[data-theme='orange'] {
+  --color-primary: #e89a3c;
+  --color-secondary: #cc5500;
+  --color-accent: #ffa07a;
+}
+
 /* base */
 :root {
   font-size: clamp(16px, max(min(4vh, 2vw), 16px), 24px);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   overflow: hidden auto;
   scroll-behavior: smooth;
+  -webkit-user-select: text;
+  user-select: text;
   
-  --color-accent: #5b85aa;
   --color-primary: #af7595;
   --color-secondary: #8c2155;
+  --color-accent: #5b85aa;
 
   --color-text: #37392e;
-  --color-background: #ebd2da;
+  --color-background: #dcecec;
 
   --color-pen: #2e3339;
   --color-paper: #eee5e5;
@@ -76,29 +107,124 @@
 }
 
 /* -- pages -- */
-#open-page {
-  #envelope {
-    width: 20rem;
-    height: 15rem;
-    margin: 10rem 0 2rem 0;
-    background-color: var(--color-accent);
-    position: relative;
-    box-shadow: 0 0 1rem #0003;
+#write-page {
+  .envelope {
+    font-size: .33rem;
   }
 
   #letter {
-    width: 18rem;
-    height: 13rem;
-    padding: 0.5rem;
+    margin: 5rem 0 1rem 0;
+    gap: 0.15rem;
+    >input[type='text'] {
+      all: unset;
+      border-bottom: 0.1em dashed oklch(from currentColor 0.2 c h / 0.2);
+    }
+  }
+
+  #theme-options {
+    max-width: 90vw;
     margin: 1rem;
+    >input[type='radio'] {
+      all: unset;
+      +label {
+        cursor: pointer;
+        margin: 0 0.5rem;
+      }
+      &:checked+label>.envelope>.envelope-flap.top {
+        animation: open-top-flap 0.5s forwards ease-in-out;
+      }
+    }
+  }
+  #img-options {
+    max-width: 90vw;
+    background-color: var(--color-paper);
+    padding: 1rem;
+    margin: 1rem;
+    >input[type='radio'] {
+      all: unset;
+      +label {
+        cursor: pointer;
+        margin: 0.5rem;
+        >img {
+          width: 5rem;
+          height: 5rem;
+          border-radius: 0.5rem;
+          object-fit: contain;
+          outline: 0.2rem solid transparent;
+          transition: outline-color 0.3s ease;
+        }
+      }
+      &:checked+label>img {
+        outline-color: var(--color-accent);
+      }
+    }
+  }
+}
+
+#open-page, #write-page {
+  .envelope {
+    background-color: var(--color-accent);
+    width: 20em;
+    height: 15em;
+    margin: 10em 0 2em 0;
+    position: relative;
+    box-shadow: 0 0 1em #0003;
+  }
+
+  #letter {
+    width: 18em;
+    height: 13em;
+    padding: 0.25em;
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
     background-color: var(--color-paper);
-    color: var(--color-pen);
-    box-shadow: 0 0 0.5rem #0003;
+    box-shadow: 0 0 0.5em #0003;
+    >p, >input[type='text'] {
+      font-size: 1.2em;
+      white-space: pre;
+      color: var(--color-pen);
+      font-family: "Victor Mono", monospace;
+      font-optical-sizing: auto;
+      font-weight: 500;
+      font-style: italic;
+    }
+    >img {
+      height: 5em;
+      align-self: center;
+      object-fit: contain;
+    }
+  }
+
+  .envelope-flap {
     position: absolute;
-    top: 0.5rem;
+    width: 0;
+    height: 0;
+    &.left, &.right {
+      top: 0;
+      border-top: 7.5em solid transparent;
+      border-bottom: 7.5em solid transparent;
+      &.left { left: 0; border-left: 10.1em solid var(--color-primary); }
+      &.right { right: 0; border-right: 10.1em solid var(--color-primary); }
+    }
+    &.top, &.bottom {
+      border-left: 10em solid transparent;
+      border-right: 10em solid transparent;
+      &.top { top: 0; border-top: 7.6em solid var(--color-secondary); transform-origin: top center; }
+      &.bottom { bottom: 0; border-bottom: 7.6em solid var(--color-secondary); }
+    }
+  }
+}
+
+#open-page {
+  .envelope {
+    font-size: 1rem;
+  }
+
+  #letter {
+    gap: 0.25em;
+    margin: 1em;
+    position: absolute;
+    top: 0.5em;
     z-index: 0;
     &.animate-slide-up {
       z-index: 10;
@@ -107,33 +233,12 @@
   }
 
   .envelope-flap {
-    position: absolute;
-    width: 0;
-    height: 0;
     z-index: 15;
-    --size-a: 10rem;
-    --size-b: 7.5rem;
-    &.left, &.right {
-      top: 0;
-      border-top: var(--size-b) solid transparent;
-      border-bottom: var(--size-b) solid transparent;
-      &.left { left: 0; border-left: var(--size-a) solid var(--color-primary); }
-      &.right { right: 0; border-right: var(--size-a) solid var(--color-primary); }
-    }
-    &.top, &.bottom {
-      border-left: var(--size-a) solid transparent;
-      border-right: var(--size-a) solid transparent;
-      &.top {
-        --flap-color: var(--color-secondary);
-        z-index: 5;
-        top: 0;
-        border-top: var(--size-b) solid var(--flap-color);
-        transform-origin: top center;
-        &.animate-open {
-          animation: open-top-flap 1s forwards ease-in-out;
-        }
+    &.top {
+      z-index: 5;
+      &.animate-open {
+        animation: open-top-flap 1s forwards ease-in-out;
       }
-      &.bottom { bottom: 0; border-bottom: var(--size-b) solid var(--color-secondary); }
     }
   }
 
@@ -158,11 +263,11 @@
 }
 
 @keyframes slide-up-letter {
-  to { top: -8rem; }
+  to { top: -8em; }
 }
 
 @keyframes open-top-flap {
-  50% { --flap-color: var(--color-secondary); }
-  50.01% { --flap-color: var(--color-accent); }
-  to { transform: rotateX(180deg); --flap-color: var(--color-accent); }
+  50% { border-top-color: var(--color-secondary); }
+  50.01% { border-top-color: var(--color-accent); }
+  to { transform: rotateX(180deg); border-top-color: var(--color-accent); }
 }

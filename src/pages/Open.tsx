@@ -1,8 +1,13 @@
 import { useRef } from 'react';
 import addIcon from '../assets/add.svg';
+import { IMG_OPTIONS } from '../commons';
+import Envelope from '../components/Envelope';
+import Letter from '../components/Letter';
 import useAnimation from '../hooks/useAnimation';
+import useDecodedMessage from '../hooks/useDecodedMessage';
 
 export default function Open() {
+  const [message, theme, img] = useDecodedMessage();
   const openButtonRef = useRef<HTMLButtonElement>(null);
   const letterRef = useRef<HTMLDivElement>(null);
   const envelopeTopFlapRef = useRef<HTMLDivElement>(null);
@@ -28,37 +33,26 @@ export default function Open() {
     <body
       id='open-page'
       className='full-size flex-center'
+      data-theme={theme}
     >
       <main
         className='flex-center column'
       >
-        <div
-          id='envelope'
+        <Envelope
+          envelopeTopFlapRef={envelopeTopFlapRef}
         >
-          <div
-            id='letter'
-            ref={letterRef}
-          >
-            {Array.from({ length: 5 }).map((_, index) => (
-              <p key={index}>
-                This is line {index + 1} of the letter.
+          <Letter
+            lineFactory={line => (
+              <p
+                key={`message-line-${line}`}
+              >
+                {message[line]}
               </p>
-            ))}
-          </div>
-          <div 
-            className='envelope-flap left'
+            )}
+            imgSrc={IMG_OPTIONS[img]}
+            ref={letterRef}
           />
-          <div 
-            className='envelope-flap right'
-          />
-          <div 
-            className='envelope-flap bottom'
-          />
-          <div 
-            ref={envelopeTopFlapRef}
-            className='envelope-flap top'
-          />
-        </div>
+        </Envelope>
         <button
           id='open-button'
           ref={openButtonRef}
@@ -71,6 +65,7 @@ export default function Open() {
       <div
         id='write-link-container'
         className='button'
+        data-color='accent'
       >
         <a
           href='/schrijf'
@@ -79,6 +74,7 @@ export default function Open() {
           <img
             src={addIcon}
             className='full-size'
+            draggable={false}
           />
         </a>
       </div>
