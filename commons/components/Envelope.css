@@ -1,0 +1,49 @@
+@property --open-angle {
+  syntax: '<angle>';
+  inherits: true;
+  initial-value: 0deg;
+}
+
+.envelope {
+  background-color: var(--color-accent);
+  width: 20em;
+  height: 15em;
+  margin: 10em 0 2em 0;
+  position: relative;
+  box-shadow: 0 0 1em #0003;
+  transition: --open-angle 0.5s ease-in-out;
+  .envelope-flap {
+    position: absolute;
+    width: 0;
+    height: 0;
+    &.left, &.right {
+      top: 0;
+      border-top: 7.5em solid transparent;
+      border-bottom: 7.5em solid transparent;
+      &.left { left: 0; border-left: 12em solid var(--color-primary); }
+      &.right { right: 0; border-right: 12em solid var(--color-primary); }
+    }
+    &.top, &.bottom {
+      border-left: 10em solid transparent;
+      border-right: 10em solid transparent;
+      &.top {
+        top: 0;
+        border-top-width: 9em;
+        border-top-style: solid;
+        transform-origin: top center;
+        &.closed {
+          border-top-color: var(--color-secondary);
+          transform: rotateX(clamp(0deg, var(--open-angle), 90deg));
+        }
+        &.opened {
+          border-top-color: var(--color-accent);
+          transform: rotateX(clamp(90deg, var(--open-angle), 180deg));
+        }
+      }
+      &.bottom { bottom: 0; border-bottom: 9em solid oklch(from var(--color-secondary) 40% c h); }
+    }
+  }
+  &.open {
+    --open-angle: 180deg;
+  }
+}

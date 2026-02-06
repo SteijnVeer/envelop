@@ -1,0 +1,25 @@
+.letter {
+  gap: 0.15em;
+  width: 18em;
+  height: 13em;
+  padding: 0.25em;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-paper);
+  box-shadow: 0 0 0.5em #0003;
+  .line {
+    all: unset;
+    font-size: 1.2em;
+    white-space: pre;
+    color: var(--color-pen);
+    font-family: "Victor Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: italic;
+  }
+  img {
+    height: 5em;
+    align-self: center;
+    object-fit: contain;
+  }
+}

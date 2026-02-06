@@ -16,8 +16,10 @@
   "name": "envelop",
   "private": true,
   "scripts": {
-    "build": "tsc -b && vite build",
-    "dev": "vite",
+    "build": "node scripts/build.js",
+    "dev:landing": "cd pages/landing && vite",
+    "dev:open": "cd pages/open && vite",
+    "dev:write": "cd pages/write && vite",
     "preview": "vite preview"
   },
   "type": "module",

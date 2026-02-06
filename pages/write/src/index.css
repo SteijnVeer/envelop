@@ -1,0 +1,57 @@
+.letter {
+  font-size: 1rem;
+  margin: 1rem;
+  .line {
+    border-bottom: 0.1em dashed oklch(from currentColor 0.2 c h / 0.2);
+  }
+}
+
+.radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  max-width: 90vw;
+  margin: 1rem;
+  input {
+    all: unset;
+    &:not(:checked)+label {
+      cursor: pointer;
+    }
+  }
+}
+
+#theme-options {
+  .envelope {
+    font-size: .33rem;
+  }
+  input {
+    +label {
+      margin: 0 0.5rem;
+    }
+    &:checked+label .envelope {
+      --open-angle: 180deg;
+    }
+  }
+}
+
+#img-options {
+  background-color: var(--color-paper);
+  padding: 1rem;
+  box-shadow: 0 0 0.5rem #0003;
+  input {
+    +label {
+      margin: 0.5rem;
+      img {
+        width: 5rem;
+        height: 5rem;
+        border-radius: 0.5rem;
+        object-fit: contain;
+        outline: 0.2rem solid transparent;
+        transition: outline-color 0.3s ease;
+      }
+    }
+    &:checked+label img {
+      outline-color: var(--color-pen);
+    }
+  }
+}
