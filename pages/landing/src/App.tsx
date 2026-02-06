@@ -1,7 +1,7 @@
 import useRedirect from '@hooks/useRedirect';
 
 export default function App() {
-  useRedirect('/schrijf')();
+  useRedirect('write')();
 
   return (
     <body>

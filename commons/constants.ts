@@ -28,3 +28,9 @@ export const PARAMS_ALIASES = {
   messageLine2: 'c',
   messageLine3: 'd',
 } as const;
+
+export const ROUTES = {
+  home: '/',
+  write: '/schrijf/',
+  open: '/open/',
+} as const;

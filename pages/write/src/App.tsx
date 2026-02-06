@@ -24,7 +24,7 @@ export default function App() {
   const canCreateOpenLink = allParamsDefined(params);
   const createOpenLink = () => {
     return canCreateOpenLink
-      ? createLink('/open/', encodeParams(PARAMS_ALIASES, params))
+      ? createLink('open', encodeParams(PARAMS_ALIASES, params))
       : null;
   };
 

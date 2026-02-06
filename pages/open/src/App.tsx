@@ -7,7 +7,7 @@ import useRedirect from '@hooks/useRedirect';
 export default function App() {
   const params = useParams(PARAMS_ALIASES);
   const { theme, img, messageLine0, messageLine1, messageLine2, messageLine3 } = params as Record<string, string>;
-  const redirect = useRedirect('/', '?r=0');
+  const redirect = useRedirect('home');
   if (!allParamsProvided(params)
     || !(img in IMG_OPTIONS)
     || !THEMES.includes(theme)

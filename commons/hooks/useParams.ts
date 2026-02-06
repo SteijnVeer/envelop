@@ -24,7 +24,7 @@ export function allParamsProvided<V extends string>(params: Record<V, string | n
   return Object.values(params).every(value => typeof value === 'string');
 }
 
-export function encodeParams<V extends string, S extends string>(alias: Record<V, S>, params: Record<V, string | null | undefined>): '' | `?${string}` {
+export function encodeParams<V extends string, S extends string>(alias: Record<V, S>, params: Record<V, string | null | undefined>): string {
   const searchParams = new URLSearchParams();
   for (const [variableName, searchParam] of Object.entries(alias) as [V, S][]) {
     const value = params[variableName];
