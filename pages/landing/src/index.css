@@ -1,0 +1,18 @@
+.error-envelope {
+  font-size: .67rem;
+  transition: none;
+  --open-angle: 180deg;
+  .envelope-flap {
+    z-index: 20;
+    &.top.opened {
+      z-index: 10;
+    }
+  }
+  .letter {
+    position: absolute;
+    margin: 1em;
+    top: -9em;
+    z-index: 15;
+  }
+}
+

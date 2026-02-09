@@ -22,11 +22,9 @@ export default function App() {
   };
 
   const canCreateOpenLink = allParamsDefined(params);
-  const createOpenLink = () => {
-    return canCreateOpenLink
-      ? createLink('open', encodeParams(PARAMS_ALIASES, params))
-      : null;
-  };
+  const openLink = canCreateOpenLink
+    ? createLink('open', encodeParams(PARAMS_ALIASES, params))
+    : null;
 
   const handleKeyDownOnMessageLineInput = (line: number, key: string) => {
     if (key === 'ArrowUp' && line > 0)
@@ -86,7 +84,7 @@ export default function App() {
         disabled={!canCreateOpenLink}
         onClick={() => {
           if (canCreateOpenLink)
-            navigator.clipboard.writeText(createOpenLink()!);
+            navigator.clipboard.writeText(openLink!);
         }}
       >
         Kopier link naar jouw envelop

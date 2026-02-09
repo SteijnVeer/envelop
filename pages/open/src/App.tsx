@@ -2,12 +2,12 @@ import Envelope from '@components/Envelope';
 import Letter from '@components/Letter';
 import { IMG_OPTIONS, MAX_MESSAGE_LENGTH, PARAMS_ALIASES, THEMES } from '@constants';
 import useParams, { allParamsProvided } from '@hooks/useParams';
-import useRedirect from '@hooks/useRedirect';
+import { useErrorRedirect } from '@hooks/useRedirect';
 
 export default function App() {
   const params = useParams(PARAMS_ALIASES);
   const { theme, img, messageLine0, messageLine1, messageLine2, messageLine3 } = params as Record<string, string>;
-  const redirect = useRedirect('home');
+  const toError = useErrorRedirect('INVALID_PARAMS');
   if (!allParamsProvided(params)
     || !(img in IMG_OPTIONS)
     || !THEMES.includes(theme)
@@ -15,7 +15,10 @@ export default function App() {
     || messageLine1.length > MAX_MESSAGE_LENGTH
     || messageLine2.length > MAX_MESSAGE_LENGTH
     || messageLine3.length > MAX_MESSAGE_LENGTH
-  ) redirect();
+  ) {
+    toError();
+    return null;
+  }
   const imgSrc = IMG_OPTIONS[img];
 
   const handleOpenButtonClick = () => {

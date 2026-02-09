@@ -15,5 +15,6 @@ for (const [page, path] of Object.entries({
 }
 
 copyFileSync(`public/favicon.ico`, `dist/favicon.ico`);
+copyFileSync(`pages/404.html`, `dist/404.html`);
 
 console.log('\nBuild completed successfully.\n');
