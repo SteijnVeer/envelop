@@ -1,33 +1,16 @@
-import heartAImg from './assets/stamp/heart-a.svg';
-import heartBImg from './assets/stamp/heart-b.svg';
-
-import bouquetAImg from './assets/stamp/bouquet-a.svg';
-import bouquetBImg from './assets/stamp/bouquet-b.svg';
-import bouquetCImg from './assets/stamp/bouquet-c.svg';
-
-import faceWithHeartsImg from './assets/stamp/face-with-hearts.svg';
-import relievedFaceImg from './assets/stamp/relieved-face.svg';
-import winkingFaceImg from './assets/stamp/winking-face.svg';
-
-import cowImg from './assets/stamp/cow.svg';
-import whaleImg from './assets/stamp/whale.svg';
-
-import cactusImg from './assets/stamp/cactus.svg';
-import presentImg from './assets/stamp/present.svg';
-
 export const IMG_OPTIONS: Record<string, string> = {
-  'heart-a': heartAImg,
-  'heart-b': heartBImg,
-  'bouquet-a': bouquetAImg,
-  'bouquet-b': bouquetBImg,
-  'bouquet-c': bouquetCImg,
-  'face-with-hearts': faceWithHeartsImg,
-  'relieved-face': relievedFaceImg,
-  'winking-face': winkingFaceImg,
-  'cow': cowImg,
-  'whale': whaleImg,
-  'cactus': cactusImg,
-  'present': presentImg,
+  'heart-a': '/stamp/heart-a.svg',
+  'heart-b': '/stamp/heart-b.svg',
+  'bouquet-a': '/stamp/bouquet-a.svg',
+  'bouquet-b': '/stamp/bouquet-b.svg',
+  'bouquet-c': '/stamp/bouquet-c.svg',
+  'face-with-hearts': '/stamp/face-with-hearts.svg',
+  'relieved-face': '/stamp/relieved-face.svg',
+  'winking-face': '/stamp/winking-face.svg',
+  'cow': '/stamp/cow.svg',
+  'whale': '/stamp/whale.svg',
+  'cactus': '/stamp/cactus.svg',
+  'present': '/stamp/present.svg',
 } as const;
 export const IMGS: string[] = Object.keys(IMG_OPTIONS);
 
